@@ -26,7 +26,8 @@ function init_minikube() {
     for i in {1..5}
     do
         minikube delete
-        minikube start --driver=kvm2 --memory="${MINIKUBE_RAM_MB}" --cpus=4 --force --wait-timeout=15m0s --disk-size="${MINIKUBE_DISK_SIZE}" --addons=registry || true
+        minikube start --driver=kvm2 --memory="${MINIKUBE_RAM_MB}" --cpus=4 --force --wait-timeout=15m0s --disk-size="${MINIKUBE_DISK_SIZE}" || true
+        minikube addons enable registry --images="Registry=quay.io/libpod/registry:2.8"
 
         if minikube status ; then
             break
